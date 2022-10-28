@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Restaurante;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class RestauranteController extends Controller
      */
     public function index()
     {
-        return view('restaurante.index');
+        $restaurantes = Restaurante::simplepaginate(5);
+        return view('restaurante.index', array('restaurantes'=>$restaurantes));
     }
 
     /**
@@ -24,7 +26,8 @@ class RestauranteController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Categoria::where('categoria_pai','=', '1')->get();
+        return view('restaurante.create',array('categorias'=>$categorias));
     }
 
     /**
@@ -35,7 +38,32 @@ class RestauranteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'nome'=>'required',
+            'email'=>'required|email',
+            'telefone'=>'required',
+            'cidade'=>'required',
+            'estado'=>'required',
+            'rua'=>'required',
+            'categoria_id'=>'required',
+        ]);
+
+        $restaurante = new Restaurante();
+        $restaurante->nome = $request->input('nome');
+        $restaurante->email = $request->input('email');
+        $restaurante->telefone = $request->input('telefone');
+        $restaurante->cidade = $request->input('cidade');
+        $restaurante->estado = $request->input('estado');
+        $restaurante->rua = $request->input('rua');
+        $restaurante->categoria_id = $request->input('categoria_id');
+        if($restaurante->save()) {
+            if($request->hasFile('foto')){
+                $imagem = $request->file('foto');
+                $nomearquivo = md5($restaurante->id).'.'.$imagem->getClientOriginalExtension();
+                $request->file('foto')->move(public_path('.\img\restaurante'),$nomearquivo);
+            }
+            return redirect('restaurantes');
+        }
     }
 
     /**
@@ -44,9 +72,10 @@ class RestauranteController extends Controller
      * @param  \App\Models\Restaurante  $restaurante
      * @return \Illuminate\Http\Response
      */
-    public function show(Restaurante $restaurante)
+    public function show($id)
     {
-        //
+        $restaurante = Restaurante::find($id);
+        return view('restaurante.show', array('restaurante'=>$restaurante));
     }
 
     /**

@@ -14,13 +14,13 @@
                 @php
                     $nomeimagem = "./img/promocao/praia.jpg";
                 @endphp
-                {{Html::image(asset($nomeimagem), Foto_Promocao ,['class'=>'d-block w-100'])}}
+                <img src="{{ asset($nomeimagem) }}" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+            <img src="{{ asset($nomeimagem) }}" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+            <img src="{{ asset($nomeimagem) }}" class="d-block w-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
