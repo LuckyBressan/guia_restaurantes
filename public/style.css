@@ -1,0 +1,52 @@
+/* SHOW RESTAURANTES  */
+
+.location-banner {
+    width: 100%;
+    height: 220px;
+    background-image:  url("./img/banner/default.jpg");
+    background-size: cover;
+    border-radius: 10px;
+}
+
+
+/*DIV COM NOME, LOGO E BOTÃO OFFCANVAS*/
+.info-loja {
+    position: absolute;
+    top: 320px;
+    
+    width: 67.5%;
+}
+    /*LOGO E NOME*/
+    .logo-loja{
+        width: 80px; 
+        height: 80px;
+        border-radius: 100%;
+        background-color: black;
+        overflow: hidden;
+    }
+
+    .logo {
+        width: 100%;
+    }
+
+    .name-loja {
+        position: absolute;
+        top: 20px;
+        left: 100px;
+        width: 600px;
+    }
+
+    /*OFFCANVAS*/
+    .ver-mais-info {
+        position: absolute;
+        right: 30px;
+        top: 28px;
+        
+    }
+
+    .info-offcanvas {
+        position: absolute;
+        left: 60px;
+        width: 300px;
+    }
+

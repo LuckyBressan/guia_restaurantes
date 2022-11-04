@@ -34,6 +34,9 @@
         {{Form::label('foto','Foto')}}
         {{Form::file('foto',['class'=>'form-control', 'id'=>'Foto'])}}
         <br>
+        {{Form::label('logo','Logo')}}
+        {{Form::file('logo',['class'=>'form-control', 'id'=>'Logo'])}}
+        <br>
         {{Form::submit('Salvar',['class'=>'btn btn-secondary'])}}
         {!!Form::button('Cancelar',['onclick'=>'javascript:history.go(-1)','class'=>'btn btn-dark'])!!}
     {{Form::close()}}

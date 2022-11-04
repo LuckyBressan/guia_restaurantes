@@ -10,18 +10,18 @@
         <div class="card mb-3">
             @php
                 $nomeimagem = "";
-                if(file_exists("./img/restaurante/".md5($restaurante->id).".jpg")){
-                    $nomeimagem = "./img/restaurante/".md5($restaurante->id).".jpg";
-                } elseif (file_exists("./img/restaurante/".md5($restaurante->id).".png")) {
-                    $nomeimagem = "./img/restaurante/".md5($restaurante->id).".png";
-                } elseif (file_exists("./img/restaurante/".md5($restaurante->id).".gif")) {
-                    $nomeimagem = "./img/restaurante/".md5($restaurante->id).".gif";
-                } elseif (file_exists("./img/restaurante/".md5($restaurante->id).".webp")) {
-                    $nomeimagem = "./img/restaurante/".md5($restaurante->id).".webp";
-                } elseif (file_exists("./img/restaurante/".md5($restaurante->id).".jpeg")) {
-                    $nomeimagem = "./img/restaurante/".md5($restaurante->id).".jpeg";
+                if(file_exists("./img/restaurante/foto/".md5($restaurante->id).".jpg")){
+                    $nomeimagem = "./img/restaurante/foto/".md5($restaurante->id).".jpg";
+                } elseif (file_exists("./img/restaurante/foto/".md5($restaurante->id).".png")) {
+                    $nomeimagem = "./img/restaurante/foto/".md5($restaurante->id).".png";
+                } elseif (file_exists("./img/restaurante/foto/".md5($restaurante->id).".gif")) {
+                    $nomeimagem = "./img/restaurante/foto/".md5($restaurante->id).".gif";
+                } elseif (file_exists("./img/restaurante/foto/".md5($restaurante->id).".webp")) {
+                    $nomeimagem = "./img/restaurante/foto/".md5($restaurante->id).".webp";
+                } elseif (file_exists("./img/restaurante/foto/".md5($restaurante->id).".jpeg")) {
+                    $nomeimagem = "./img/restaurante/foto/".md5($restaurante->id).".jpeg";
                 } else {
-                    $nomeimagem = "./img/restaurante/usuario.png";
+                    $nomeimagem = "./img/restaurante/foto/default.png";
                 }
             @endphp
             {{ Html::image(asset($nomeimagem)), 'Foto de '.$restaurante->nome, ['class'=>'card-img-top'] }}

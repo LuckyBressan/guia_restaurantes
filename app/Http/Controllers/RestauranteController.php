@@ -60,7 +60,12 @@ class RestauranteController extends Controller
             if($request->hasFile('foto')){
                 $imagem = $request->file('foto');
                 $nomearquivo = md5($restaurante->id).'.'.$imagem->getClientOriginalExtension();
-                $request->file('foto')->move(public_path('.\img\restaurante'),$nomearquivo);
+                $request->file('foto')->move(public_path('.\img\restaurante\foto'),$nomearquivo);
+            }
+            if($request->hasFile('logo')){
+                $imagem = $request->file('logo');
+                $nomearquivo = md5($restaurante->id).'.'.$imagem->getClientOriginalExtension();
+                $request->file('logo')->move(public_path('.\img\restaurante\logo'),$nomearquivo);
             }
             return redirect('restaurantes');
         }
@@ -84,9 +89,11 @@ class RestauranteController extends Controller
      * @param  \App\Models\Restaurante  $restaurante
      * @return \Illuminate\Http\Response
      */
-    public function edit(Restaurante $restaurante)
+    public function edit($id)
     {
-        //
+        $restaurante = Restaurante::find($id);
+        $categorias = Categoria::where('categoria_pai','=', '1')->get();
+        return view('restaurante.edit', array('restaurante'=>$restaurante, 'categorias'=>$categorias));
     }
 
     /**
@@ -96,9 +103,40 @@ class RestauranteController extends Controller
      * @param  \App\Models\Restaurante  $restaurante
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Restaurante $restaurante)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'nome'=>'required',
+            'email'=>'required|email',
+            'telefone'=>'required',
+            'cidade'=>'required',
+            'estado'=>'required',
+            'rua'=>'required',
+            'categoria_id'=>'required',
+        ]);
+
+        $restaurante = Restaurante::find($id);
+        if($request->hasFile('foto')){
+            $imagem = $request->file('foto');
+            $nomearquivo = md5($restaurante->id).'.'.$imagem->getClientOriginalExtension();
+            $request->file('foto')->move(public_path('.\img\restaurante\foto'),$nomearquivo);
+        }
+        if($request->hasFile('logo')){
+            $imagem = $request->file('logo');
+            $nomearquivo = md5($restaurante->id).'.'.$imagem->getClientOriginalExtension();
+            $request->file('logo')->move(public_path('.\img\restaurante\logo'),$nomearquivo);
+        }
+
+        $restaurante->nome = $request->input('nome');
+        $restaurante->email = $request->input('email');
+        $restaurante->telefone = $request->input('telefone');
+        $restaurante->cidade = $request->input('cidade');
+        $restaurante->estado = $request->input('estado');
+        $restaurante->rua = $request->input('rua');
+        $restaurante->categoria_id = $request->input('categoria_id');
+        if($restaurante->save()) {
+            return redirect(url('contatos/'));
+        }
     }
 
     /**
