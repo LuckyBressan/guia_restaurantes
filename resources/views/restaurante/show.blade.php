@@ -4,6 +4,12 @@
     @section('create')
         <a href="{{ url('restaurantes/'.$restaurante->id.'/edit') }}" class="nav-link">Editar</a>
     @endsection
+    @section('create-funcionario')
+        <a href="{{ url('funcionarios/create') }}" class="nav-link">Registrar Funcionário</a>
+    @endsection
+    @section('edit-funcionario')
+        
+    @endsection
 
     
     <header class="location-banner">
@@ -54,7 +60,85 @@
                     </div>
                 </div>
             </div>
+        </div> <hr>
+        <div class="conteudo">
+            <h1>Ambiente</h1><hr>
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        @php
+                            $nomeimagem = "./img/promocao/praia.jpg";
+                        @endphp
+                        <img src="{{ asset($nomeimagem) }}" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="{{ asset($nomeimagem) }}" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="{{ asset($nomeimagem) }}" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <br>
+
+
+            <h1>Pratos</h1><hr>
+            <div class="local-fotos-pratos">
+                <div class="fotos-pratos">
+                    <img src="">
+                </div>
+            </div>
+            <br>
+
+
+            <h1>Equipe</h1> <hr>
+            <div class="local-fotos-funcionarios">
+                @foreach($funcionarios as $funcionario)
+                    <a href="{{ url('funcionarios/'.$funcionario->id.'/edit') }}" class="nav-link">
+                        <div class="fotos-funcionarios">
+                            @php
+                                $nomeimagem = "";
+                                if(file_exists("./img/funcionario/".md5($funcionario->id).".jpg")){
+                                    $nomeimagem = "./img/funcionario/".md5($funcionario->id).".jpg";
+                                } elseif (file_exists("./img/funcionario/".md5($funcionario->id).".png")) {
+                                    $nomeimagem = "./img/funcionario/".md5($funcionario->id).".png";
+                                } elseif (file_exists("./img/funcionario/".md5($funcionario->id).".gif")) {
+                                    $nomeimagem = "./img/funcionario/".md5($funcionario->id).".gif";
+                                } elseif (file_exists("./img/funcionario/".md5($funcionario->id).".webp")) {
+                                    $nomeimagem = "./img/funcionario/".md5($funcionario->id).".webp";
+                                } elseif (file_exists("./img/funcionario/".md5($funcionario->id).".jpeg")) {
+                                    $nomeimagem = "./img/funcionario/".md5($funcionario->id).".jpeg";
+                                } else {
+                                    $nomeimagem = "./img/funcionario/default.png";
+                                }
+                            @endphp
+                            <img src="{{ asset($nomeimagem) }}" class="foto-funcionario">
+                            <span class="texto">
+                                {{ $funcionario->nome }} - {{ $funcionario->funcao }}
+
+                            </span>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+            
+           
+            
         </div>
+
     </div>
 
 @endsection

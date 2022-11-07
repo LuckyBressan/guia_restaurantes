@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Restaurante;
+use App\Models\FuncionarioRestaurante;
 use Illuminate\Http\Request;
+
 
 class RestauranteController extends Controller
 {
@@ -80,7 +82,8 @@ class RestauranteController extends Controller
     public function show($id)
     {
         $restaurante = Restaurante::find($id);
-        return view('restaurante.show', array('restaurante'=>$restaurante));
+        $funcionarios = FuncionarioRestaurante::where('restaurante_id','=',$id)->get();
+        return view('restaurante.show', array('restaurante'=>$restaurante, 'funcionarios'=>$funcionarios));
     }
 
     /**

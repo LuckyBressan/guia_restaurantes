@@ -40,6 +40,12 @@
                         <li class="nav-item">
                             @yield('create')
                         </li>
+                        <li class="nav-item">
+                            @yield('create-funcionario')
+                        </li>
+                        <li class="nav-item">
+                            @yield('edit-funcionario')
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
