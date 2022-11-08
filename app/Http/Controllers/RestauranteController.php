@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Restaurante;
 use App\Models\FuncionarioRestaurante;
+use App\Models\CardapioRestaurante;
 use Illuminate\Http\Request;
 
 
@@ -83,7 +84,8 @@ class RestauranteController extends Controller
     {
         $restaurante = Restaurante::find($id);
         $funcionarios = FuncionarioRestaurante::where('restaurante_id','=',$id)->get();
-        return view('restaurante.show', array('restaurante'=>$restaurante, 'funcionarios'=>$funcionarios));
+        $cardapios = CardapioRestaurante::where('restaurante_id','=',$id)->get();
+        return view('restaurante.show', array('restaurante'=>$restaurante, 'funcionarios'=>$funcionarios, 'cardapios'=>$cardapios));
     }
 
     /**
@@ -138,7 +140,7 @@ class RestauranteController extends Controller
         $restaurante->rua = $request->input('rua');
         $restaurante->categoria_id = $request->input('categoria_id');
         if($restaurante->save()) {
-            return redirect(url('contatos/'));
+            return redirect(url('restaurantes/'));
         }
     }
 

@@ -2,11 +2,13 @@
 @section('title','Listagem de Restaurantes')
 @section('content')
     @section('create')
-        <a class="nav-link" href="{{ url('restaurantes/create') }}">Criar</a>
+        <a class="nav-link" href="{{ url('restaurantes/create') }}">Registrar Restaurante</a>
     @endsection
 
     <h1>Listagem de Restaurantes</h1>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
     @foreach($restaurantes as $restaurante)
+        <div class="col">
         <div class="card mb-3">
             @php
                 $nomeimagem = "";
@@ -34,6 +36,7 @@
 
                 <a href="{{ url('restaurantes/'.$restaurante->id) }}" class="btn btn-dark">Mais Informações</a>
             </div>
+        </div>
         </div>
     @endforeach
 

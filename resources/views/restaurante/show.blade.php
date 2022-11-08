@@ -7,8 +7,8 @@
     @section('create-funcionario')
         <a href="{{ url('funcionarios/create') }}" class="nav-link">Registrar Funcionário</a>
     @endsection
-    @section('edit-funcionario')
-        
+    @section('create-prato')
+        <a href="{{ url('cardapios/create') }}" class="nav-link">Registrar Prato</a>
     @endsection
 
     
@@ -96,45 +96,78 @@
 
 
             <h1>Pratos</h1><hr>
-            <div class="local-fotos-pratos">
-                <div class="fotos-pratos">
-                    <img src="">
-                </div>
-            </div>
-            <br>
-
-
-            <h1>Equipe</h1> <hr>
-            <div class="local-fotos-funcionarios">
-                @foreach($funcionarios as $funcionario)
-                    <a href="{{ url('funcionarios/'.$funcionario->id.'/edit') }}" class="nav-link">
-                        <div class="fotos-funcionarios">
-                            @php
-                                $nomeimagem = "";
-                                if(file_exists("./img/funcionario/".md5($funcionario->id).".jpg")){
-                                    $nomeimagem = "./img/funcionario/".md5($funcionario->id).".jpg";
-                                } elseif (file_exists("./img/funcionario/".md5($funcionario->id).".png")) {
-                                    $nomeimagem = "./img/funcionario/".md5($funcionario->id).".png";
-                                } elseif (file_exists("./img/funcionario/".md5($funcionario->id).".gif")) {
-                                    $nomeimagem = "./img/funcionario/".md5($funcionario->id).".gif";
-                                } elseif (file_exists("./img/funcionario/".md5($funcionario->id).".webp")) {
-                                    $nomeimagem = "./img/funcionario/".md5($funcionario->id).".webp";
-                                } elseif (file_exists("./img/funcionario/".md5($funcionario->id).".jpeg")) {
-                                    $nomeimagem = "./img/funcionario/".md5($funcionario->id).".jpeg";
-                                } else {
-                                    $nomeimagem = "./img/funcionario/default.png";
-                                }
-                            @endphp
-                            <img src="{{ asset($nomeimagem) }}" class="foto-funcionario">
-                            <span class="texto">
-                                {{ $funcionario->nome }} - {{ $funcionario->funcao }}
-
-                            </span>
+            <div class="row row-cols-1 row-cols-md-5 g-4">
+                @php
+                    $cont = 1;
+                @endphp
+                    @foreach($cardapios as $cardapio)
+                        <div class="col">
+                            <a href="{{ url('cardapios/'.$cardapio->restaurante_id) }}">
+                                <div class="local-fotos-pratos">
+                                    @if($cont < 5)
+                                        @php
+                                            $nomeimagem = "";
+                                            if(file_exists("./img/restaurante/cardapio/".md5($cardapio->id).".jpg")){
+                                                $nomeimagem = "./img/restaurante/cardapio/".md5($cardapio->id).".jpg";
+                                            } elseif (file_exists("./img/restaurante/cardapio/".md5($cardapio->id).".png")) {
+                                                $nomeimagem = "./img/restaurante/cardapio/".md5($cardapio->id).".png";
+                                            } elseif (file_exists("./img/restaurante/cardapio/".md5($cardapio->id).".gif")) {
+                                                $nomeimagem = "./img/restaurante/cardapio/".md5($cardapio->id).".gif";
+                                            } elseif (file_exists("./img/restaurante/cardapio/".md5($cardapio->id).".webp")) {
+                                                $nomeimagem = "./img/restaurante/cardapio/".md5($cardapio->id).".webp";
+                                            } elseif (file_exists("./img/restaurante/cardapio/".md5($cardapio->id).".jpeg")) {
+                                                $nomeimagem = "./img/restaurante/cardapio/".md5($cardapio->id).".jpeg";
+                                            } else {
+                                                $nomeimagem = "./img/restaurante/cardapio/default.png";
+                                            }
+                                        @endphp
+                                        <img src="{{ asset($nomeimagem) }}" class="fotos-pratos">
+                                    @endif
+                                    @if($cont == 5)
+                                        <h3>Ver Mais</h3>
+                                    @endif
+                                </div>
+                            </a>
                         </div>
-                    </a>
+                        @php
+                            $cont++
+                        @endphp
                 @endforeach
             </div>
-            
+            <br>
+                            
+            <h1>Equipe</h1> <hr>
+            <div class="row row-cols-1 row-cols-md-5 g-4">
+                @foreach($funcionarios as $funcionario)
+                    <div class="col">
+                        <a href="{{ url('funcionarios/'.$funcionario->id.'/edit') }}" class="nav-link">
+                            <div class="local-fotos-funcionarios">
+                                @php
+                                    $nomeimagem = "";
+                                    if(file_exists("./img/restaurante/funcionario/".md5($funcionario->id).".jpg")){
+                                        $nomeimagem = "./img/restaurante/funcionario/".md5($funcionario->id).".jpg";
+                                    } elseif (file_exists("./img/restaurante/funcionario/".md5($funcionario->id).".png")) {
+                                        $nomeimagem = "./img/restaurante/funcionario/".md5($funcionario->id).".png";
+                                    } elseif (file_exists("./img/restaurante/funcionario/".md5($funcionario->id).".gif")) {
+                                        $nomeimagem = "./img/restaurante/funcionario/".md5($funcionario->id).".gif";
+                                    } elseif (file_exists("./img/restaurante/funcionario/".md5($funcionario->id).".webp")) {
+                                        $nomeimagem = "./img/restaurante/funcionario/".md5($funcionario->id).".webp";
+                                    } elseif (file_exists("./img/restaurante/funcionario/".md5($funcionario->id).".jpeg")) {
+                                        $nomeimagem = "./img/restaurante/funcionario/".md5($funcionario->id).".jpeg";
+                                    } else {
+                                        $nomeimagem = "./img/restaurante/funcionario/default.png";
+                                    }
+                                @endphp
+                                <img src="{{ asset($nomeimagem) }}" class="foto-funcionario">
+                                <span class="texto">
+                                    {{ $funcionario->nome }} - {{ $funcionario->funcao }}
+
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
            
             
         </div>

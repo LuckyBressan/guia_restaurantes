@@ -57,10 +57,11 @@
     position: absolute;
     top: 150px;
 }   
-    .fotos-funcionarios {
+    /* FUNCIONÁRIO */
+    .local-fotos-funcionarios {
         position: relative;
-        float: left;
-        margin: 5px;
+        /*float: left;
+        margin: 5px;*/
         background-color: black;
         width: 250px;
         height: 400px;
@@ -90,15 +91,47 @@
         margin: auto;
         transition: all 0.4s ease;
     }
-    .fotos-funcionarios:hover .texto {
+    .local-fotos-funcionarios:hover .texto {
         opacity: 1;
         visibility: visible;
         bottom: 0;
     }
-    .fotos-pratos {
+
+    /* PRATOS */
+    .local-fotos-pratos {
+        /*position: relative;
+        float: left;
+        margin: 5px;*/
         background-color: black;
         width: 250px;
         height: 400px;
         border-radius: 10px;
+        overflow: hidden;
+    }
+    .fotos-pratos {
+         width: 250px;
+        height: 400px;
+        object-fit: cover;
+        -webkit-transition: -webkit-transform .5s ease;
+        transition: transform .5s ease;
+    }
+
+    .local-fotos-pratos:hover img {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+
+    /* CARDAPIO */
+    .local-foto-cardapio {
+        background-color: black;
+        width: 160px;
+        height: 160px;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    .foto-cardapio {
+        width: 180px;
+        height: 160px;
+        object-fit: cover;
     }
 

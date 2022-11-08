@@ -54,7 +54,7 @@ class FuncionarioRestauranteController extends Controller
             if($request->hasFile('foto')){
                 $imagem = $request->file('foto');
                 $nomearquivo = md5($funcionario->id).'.'.$imagem->getClientOriginalExtension();
-                $request->file('foto')->move(public_path('.\img\funcionario'),$nomearquivo);
+                $request->file('foto')->move(public_path('.\img\restaurante\funcionario'),$nomearquivo);
             }
             return redirect('restaurantes');
         }
@@ -110,9 +110,9 @@ class FuncionarioRestauranteController extends Controller
             if($request->hasFile('foto')){
                 $imagem = $request->file('foto');
                 $nomearquivo = md5($funcionario->id).'.'.$imagem->getClientOriginalExtension();
-                $request->file('foto')->move(public_path('.\img\funcionario'),$nomearquivo);
+                $request->file('foto')->move(public_path('.\img\restaurante\funcionario'),$nomearquivo);
             }
-            return redirect('restaurantes/'.$id);
+            return redirect('restaurantes/');
         }
     }
 

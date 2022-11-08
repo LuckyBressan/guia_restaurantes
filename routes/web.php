@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestauranteController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\FuncionarioRestauranteController;
+use App\Http\Controllers\CardapioRestauranteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Route::resource('restaurantes',RestauranteController::class);
 
 Route::resource('funcionarios',FuncionarioRestauranteController::class);
 
+Route::resource('cardapios',CardapioRestauranteController::class);
 
 Route::resource('categorias',CategoriaController::class);
 

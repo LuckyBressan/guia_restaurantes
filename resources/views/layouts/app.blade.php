@@ -44,7 +44,7 @@
                             @yield('create-funcionario')
                         </li>
                         <li class="nav-item">
-                            @yield('edit-funcionario')
+                            @yield('create-prato')
                         </li>
                     </ul>
 
