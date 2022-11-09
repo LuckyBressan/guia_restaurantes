@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('title','Listagem de Restaurantes')
 @section('content')
-    @section('create')
-        <a class="nav-link" href="{{ url('restaurantes/create') }}">Registrar Restaurante</a>
-    @endsection
-
-    <h1>Listagem de Restaurantes</h1>
+    @if ((Auth::check()) && (Auth::user()->isAdmin()))
+        @section('create')
+            <a class="nav-link" href="{{ url('restaurantes/create') }}">Registrar Restaurante</a>
+        @endsection
+    @endif
+    
     <div class="row row-cols-1 row-cols-md-2 g-4">
     @foreach($restaurantes as $restaurante)
         <div class="col">
