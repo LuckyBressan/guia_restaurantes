@@ -1,0 +1,109 @@
+/* PRATOS */
+.local-fotos-pratos {
+    /*position: relative;
+    float: left;
+    margin: 5px;*/
+    background-color: black;
+    width: 250px;
+    height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.fotos-pratos {
+     width: 250px;
+    height: 400px;
+    object-fit: cover;
+    -webkit-transition: -webkit-transform .5s ease;
+    transition: transform .5s ease;
+}
+
+.local-fotos-pratos:hover img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+/* CARDAPIO */
+.local-foto-cardapio {
+    background-color: black;
+    width: 160px;
+    height: 160px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.foto-cardapio {
+    width: 180px;
+    height: 160px;
+    object-fit: cover;
+}
+.ver-mais-geral {
+    position: relative;
+    background-color: #d7d8d7;
+    width: 250px;
+    height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.caixa-ver-mais {
+    position: absolute;
+    top: 135px;
+    left: 30%;
+    -webkit-transition: -webkit-transform .5s ease;
+    transition: transform .5s ease;
+}
+.ver-mais-geral:hover div {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.criar-novo-prato {
+    position: relative;
+    background-color: #d7d8d7;
+    width: 415px;
+    height: 162px;
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: center;
+    line-height: 200px;
+}
+.criar-novo-icon {
+    -webkit-transition: -webkit-transform .5s ease;
+    transition: transform .5s ease;
+}
+.criar-novo-prato:hover div {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.card-cardapio{
+    position: relative;
+}
+.excluir {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    bottom: 200px;
+    width: 50%;
+    line-height: 45px;
+    height: 100%;
+    display: block;
+    background-color: red;
+    color: #FFF;
+    border: 0;
+    border-radius: 5px 0px 0px 5px;
+    text-align: center;
+    font-family: "Arial";
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    margin: auto;
+    transition: all 0.4s ease;
+
+}
+.card-cardapio:hover .excluir{
+    opacity: 1;
+    visibility: visible;
+    bottom: 0;
+}
+

@@ -1,6 +1,6 @@
 @import url('https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css');
 
-/* SHOW RESTAURANTES  */
+/* SHOW RESTAURANTES E BARES  */
 
 .location-banner {
     width: 100%;
@@ -10,8 +10,7 @@
     border-radius: 10px;
 }
 
-
-/*DIV COM NOME, LOGO E BOTÃO OFFCANVAS*/
+/*DIV COM NOME, LOGO E BOTÃO OFFCANVAS DO ESTABELECIMENTO*/
 .info-loja {
     position: absolute;
     top: 320px;
@@ -53,105 +52,8 @@
     }
 
 
-/* DIV COM O CONTEUDO DA SHOW */
-
+/* DIV COM O CONTEUDO PRINCIPAL DA SHOW */
 .conteudo {
     position: absolute;
     top: 150px;
-}   
-    /* FUNCIONÁRIO */
-    .local-fotos-funcionarios {
-        position: relative;
-        /*float: left;
-        margin: 5px;*/
-        background-color: black;
-        width: 250px;
-        height: 400px;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-    .foto-funcionario {
-        width: 250px;
-        height: 400px;
-        object-fit: cover;
-    }
-    .texto {
-        position: absolute;
-        opacity: 0;
-        visibility: hidden;
-        bottom: 200px;
-        width: 100%;
-        line-height: 45px;
-        height: 45px;
-        display: block;
-        background-color: #000;
-        color: #FFF;
-        text-align: center;
-        font-family: "Roboto";
-        left: 0;
-        top: 0;
-        margin: auto;
-        transition: all 0.4s ease;
-    }
-    .local-fotos-funcionarios:hover .texto {
-        opacity: 1;
-        visibility: visible;
-        bottom: 0;
-    }
-
-    /* PRATOS */
-    .local-fotos-pratos {
-        /*position: relative;
-        float: left;
-        margin: 5px;*/
-        background-color: black;
-        width: 250px;
-        height: 400px;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-    .fotos-pratos {
-         width: 250px;
-        height: 400px;
-        object-fit: cover;
-        -webkit-transition: -webkit-transform .5s ease;
-        transition: transform .5s ease;
-    }
-
-    .local-fotos-pratos:hover img {
-        -webkit-transform: scale(1.1);
-        transform: scale(1.1);
-    }
-
-    /* CARDAPIO */
-    .local-foto-cardapio {
-        background-color: black;
-        width: 160px;
-        height: 160px;
-        border-radius: 5px;
-        overflow: hidden;
-    }
-    .foto-cardapio {
-        width: 180px;
-        height: 160px;
-        object-fit: cover;
-    }
-    .ver-mais-geral {
-        position: relative;
-        background-color: #d7d8d7;
-        width: 250px;
-        height: 400px;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-    .caixa-ver-mais {
-        position: absolute;
-        top: 135px;
-        left: 30%;
-        -webkit-transition: -webkit-transform .5s ease;
-        transition: transform .5s ease;
-    }
-    .ver-mais-geral:hover div {
-        -webkit-transform: scale(1.1);
-        transform: scale(1.1);
-    }
+}  

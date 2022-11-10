@@ -6,10 +6,10 @@
             <a href="{{ url('restaurantes/'.$restaurante->id.'/edit') }}" class="nav-link">Editar</a>
         @endsection
         @section('create-funcionario')
-            <a href="{{ url('funcionarios/create') }}" class="nav-link">Registrar Funcionário</a>
+            
         @endsection
         @section('create-prato')
-            <a href="{{ url('cardapios/create') }}" class="nav-link">Registrar Prato</a>
+             
         @endsection
     @endif
 
@@ -223,13 +223,7 @@
                 @foreach($funcionarios as $funcionario)
                     @if($cont < 5)
                         <div class="col">
-                            @if ((Auth::check()) && (Auth::user()->isAdmin()))
-                            <a href="{{ url('funcionarios/'.$funcionario->id.'/edit') }}" class="nav-link">
-                            @endif
-                            <!--  REVISAR ESSE IFFFF !-->
-                            @if ((Auth::!check()) || (Auth::check()) && (Auth::user()->!isAdmin()))
                             <a href="{{ url('funcionarios/'.$funcionario->restaurante_id) }}">
-                            @endif
                                 <div class="local-fotos-funcionarios">
                                     @php
                                         $nomeimagem = "";
@@ -252,12 +246,7 @@
                                         {{ $funcionario->nome }} - {{ $funcionario->funcao }}
                                     </span>
                                 </div>
-                            @if ((Auth::check()) && (Auth::user()->isAdmin()))
                             </a>
-                            @endif
-                            @if ((Auth::!check()) || (Auth::check()) && (Auth::user()->!isAdmin()))
-                            </a>
-                            @endif
                         </div>
                     @endif
                     @if($cont == 5)

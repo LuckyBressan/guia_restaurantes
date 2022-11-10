@@ -63,7 +63,7 @@ class CardapioRestauranteController extends Controller
                     $nomearquivo = md5($cardapio->id).'.'.$imagem->getClientOriginalExtension();
                     $request->file('foto')->move(public_path('.\img\restaurante\cardapio'),$nomearquivo);
                 }
-                return redirect('restaurantes');
+                return redirect('cardapios/'.$cardapio->restaurante_id);
             }
         } else {
             return redirect('login');
@@ -89,10 +89,12 @@ class CardapioRestauranteController extends Controller
      * @param  \App\Models\CardapioRestaurante  $cardapioRestaurante
      * @return \Illuminate\Http\Response
      */
-    public function edit(CardapioRestaurante $cardapioRestaurante)
+    public function edit($id)
     {
         if((Auth::check()) && (Auth::user()->isAdmin())) {
-
+            $cardapio = CardapioRestaurante::find($id);
+            $restaurantes = Restaurante::all();
+            return view('cardapio_restaurante.edit', array('restaurantes'=>$restaurantes, 'cardapio'=>$cardapio));
         } else {
             return redirect('login');
         }
@@ -105,10 +107,30 @@ class CardapioRestauranteController extends Controller
      * @param  \App\Models\CardapioRestaurante  $cardapioRestaurante
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CardapioRestaurante $cardapioRestaurante)
+    public function update(Request $request, $id)
     {
         if((Auth::check()) && (Auth::user()->isAdmin())) {
-
+            $this->validate($request,[
+                'nome'=>'required',
+                'descricao'=>'required',
+                'valor'=>'required',
+                'restaurante_id'=>'required',
+            ]);
+    
+            $cardapio = CardapioRestaurante::find($id);
+            $cardapio->nome = $request->input('nome');
+            $cardapio->descricao = $request->input('descricao');
+            $cardapio->valor = $request->input('valor');
+            $cardapio->restaurante_id = $request->input('restaurante_id');
+    
+            if($cardapio->save()) {
+                if($request->hasFile('foto')){
+                    $imagem = $request->file('foto');
+                    $nomearquivo = md5($cardapio->id).'.'.$imagem->getClientOriginalExtension();
+                    $request->file('foto')->move(public_path('.\img\restaurante\cardapio'),$nomearquivo);
+                }
+                return redirect('cardapios/'.$cardapio->restaurante_id);
+            }
         } else {
             return redirect('login');
         }
@@ -120,8 +142,17 @@ class CardapioRestauranteController extends Controller
      * @param  \App\Models\CardapioRestaurante  $cardapioRestaurante
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CardapioRestaurante $cardapioRestaurante)
+    public function destroy(Request $request, $id)
     {
-        //
+        if(Auth::check()) {
+            $cardapio = CardapioRestaurante::find($id);
+            if(isset($request->foto)){
+                unlink($request->foto);
+            }
+            $cardapio->delete();
+            return redirect('cardapios/'.$cardapio->restaurante_id);
+        } else {
+            return redirect('login');
+        }
     }
 }

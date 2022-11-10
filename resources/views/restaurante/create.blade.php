@@ -2,6 +2,7 @@
 @section('title','Listagem de Restaurantes')
 @section('content')
     <h1>Registro de Restaurantes</h1>
+    <hr>
     
     {{Form::open(['route'=>'restaurantes.store','method'=>'POST', 'enctype'=>'multipart/form-data'])}}
         {{Form::label('nome','Nome')}}

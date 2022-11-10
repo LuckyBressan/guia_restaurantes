@@ -19,7 +19,9 @@ use App\Http\Controllers\CardapioRestauranteController;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
+Route::get('restaurantes/buscar',[RestauranteController::class,'buscar']);
 Route::resource('restaurantes',RestauranteController::class);
+
 
 Route::resource('funcionarios',FuncionarioRestauranteController::class);
 

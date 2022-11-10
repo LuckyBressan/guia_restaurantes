@@ -28,7 +28,7 @@ class FuncionarioRestauranteController extends Controller
     {
         if((Auth::check()) && (Auth::user()->isAdmin())) {
             $restaurantes = Restaurante::all();
-            return view('funcionario.create',array('restaurantes'=>$restaurantes));
+            return view('funcionario_restaurante.create',array('restaurantes'=>$restaurantes));
         } else {
             return redirect('login');
         }
@@ -62,7 +62,7 @@ class FuncionarioRestauranteController extends Controller
                     $nomearquivo = md5($funcionario->id).'.'.$imagem->getClientOriginalExtension();
                     $request->file('foto')->move(public_path('.\img\restaurante\funcionario'),$nomearquivo);
                 }
-                return redirect('restaurantes');
+                return redirect('funcionarios/'.$funcionario->restaurante_id);
             }
         } else {
             return redirect('login');
@@ -76,9 +76,10 @@ class FuncionarioRestauranteController extends Controller
      * @param  \App\Models\FuncionarioRestaurante  $funcionarioRestaurante
      * @return \Illuminate\Http\Response
      */
-    public function show(FuncionarioRestaurante $funcionarioRestaurante)
+    public function show($id)
     {
-        //
+        $funcionarios = FuncionarioRestaurante::where('restaurante_id','=',$id)->get();
+        return view('funcionario_restaurante.show', array('funcionarios'=>$funcionarios));
     }
 
     /**
@@ -92,7 +93,7 @@ class FuncionarioRestauranteController extends Controller
         if((Auth::check()) && (Auth::user()->isAdmin())) {
             $funcionario = FuncionarioRestaurante::find($id);
             $restaurantes = Restaurante::all();
-            return view('funcionario.edit',array('funcionario'=>$funcionario,'restaurantes'=>$restaurantes));
+            return view('funcionario_restaurante.edit',array('funcionario'=>$funcionario,'restaurantes'=>$restaurantes));
         } else {
             return redirect('login');
         }
@@ -128,7 +129,7 @@ class FuncionarioRestauranteController extends Controller
                     $nomearquivo = md5($funcionario->id).'.'.$imagem->getClientOriginalExtension();
                     $request->file('foto')->move(public_path('.\img\restaurante\funcionario'),$nomearquivo);
                 }
-                return redirect('restaurantes/');
+                return redirect('funcionarios/'.$funcionario->restaurante_id);
             }
         } else {
             return redirect('login');

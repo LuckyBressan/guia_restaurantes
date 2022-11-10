@@ -20,9 +20,19 @@ class RestauranteController extends Controller
      */
     public function index()
     {
-        $restaurantes = Restaurante::simplepaginate(5);
-        return view('restaurante.index', array('restaurantes'=>$restaurantes));
+        $restaurantes = Restaurante::simplepaginate(6);
+        return view('restaurante.index', array('restaurantes'=>$restaurantes, 'busca'=>null));
     }
+
+    public function buscar(Request $request) {
+        $restaurantes = Restaurante::where('nome','LIKE', '%'.
+        $request->input('busca'). '%')->orwhere('cidade', 'LIKE', '%'.
+        $request->input('busca'). '%')->orwhere('estado', 'LIKE', '%'.
+        $request->input('busca'). '%')->orwhere('rua', 'LIKE', '%'.
+        $request->input('busca'). '%')->simplepaginate(6);
+        return view('restaurante.index', array('restaurantes'=>$restaurantes, 'busca'=>$request->input('busca')));
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -4,16 +4,16 @@
     
     {{Form::open(['route'=>['cardapios.update',$cardapio->id],'method'=>'PUT', 'enctype'=>'multipart/form-data'])}}
     {{Form::label('nome','Nome')}}
-        {{Form::text('nome','',['class'=>'form-control','required', 'placeholder'=>'Nome do Prato'])}}
+        {{Form::text('nome',$cardapio->nome,['class'=>'form-control','required', 'placeholder'=>'Nome do Prato'])}}
         <br>
         {{Form::label('descricao','Descricao')}}
-        {{Form::textarea('descricao','',['class'=>'form-control','required', 'placeholder'=>'Descrição do prato...'])}}
+        {{Form::textarea('descricao',$cardapio->descricao,['class'=>'form-control','required', 'placeholder'=>'Descrição do prato...'])}}
         <br>
         {{Form::label('valor','Valor')}}
-        {{Form::number('valor','',['class'=>'form-control','required', 'placeholder'=>'Valor do Prato'])}}
+        {{Form::number('valor',$cardapio->valor,['class'=>'form-control','required', 'placeholder'=>'Valor do Prato'])}}
         <br>
         {{Form::label('restaurante_id','Restaurante')}}
-        {{Form::text('restaurante_id','',['class'=>'form-control','required', 'placeholder'=>'Selecione o restaurante...', 'list'=>'listrestaurantes'])}}
+        {{Form::text('restaurante_id',$cardapio->restaurante_id,['class'=>'form-control','required', 'placeholder'=>'Selecione o restaurante...', 'list'=>'listrestaurantes'])}}
         <datalist id="listrestaurantes">
             @foreach($restaurantes as $restaurante)
                 <option value="{{$restaurante->id}}">{{$restaurante->nome}}</option>

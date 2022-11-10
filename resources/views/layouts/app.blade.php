@@ -12,7 +12,15 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
+    <!-- CSS GERAL -->
     <link rel="stylesheet" href="{{ asset('style.css') }}" type="text/css">
+    
+    <!-- CSS FUNCIONARIOS -->
+    <link rel="stylesheet" href="{{ asset('funcionario.css') }}" type="text/css">
+
+    <!-- CSS PRATOS -->
+    <link rel="stylesheet" href="{{ asset('pratos.css') }}" type="text/css">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])

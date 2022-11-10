@@ -1,13 +1,24 @@
 @extends('layouts.app')
 @section('title','Visualização de Restaurantes')
 @section('content')
-    @section('create-prato')
-        <a href="{{ url('cardapios/create') }}" class="nav-link">Registrar Prato</a>
-    @endsection
     <div class="row row-cols-1 row-cols-md-3 g-4">
+    @if ((Auth::check()) && (Auth::user()->isAdmin()))
+        <div class="col">
+            <a href="{{ url('cardapios/create') }}" style="text-decoration: none; color:inherit;">
+                <div class="criar-novo-prato">
+                    <div class="criar-novo-icon">
+                        <i class="fi fi-sr-add" style="font-size: 100px;"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    @endif
     @foreach($cardapios as $cardapio)
         <div class="col">
-            <div class="card mb-3" style="max-width: 540px;">
+            @if ((Auth::check()) && (Auth::user()->isAdmin()))
+            <a href="{{ url('cardapios/'.$cardapio->id.'/edit') }}" style="text-decoration: none; color:inherit;">
+            @endif
+            <div class="card mb-3 card-cardapio" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4 local-foto-cardapio">
                         @php
@@ -29,16 +40,24 @@
                         <img src="{{ asset($nomeimagem) }}" class="foto-cardapio" alt="...">
                     </div>
                     <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title"><strong>{{ $cardapio->nome }}</strong></h5>
-                        <p class="card-text">
-                            <strong>INGREDIENTES: </strong>{{ $cardapio->descricao }} <br>
-                            <strong>VALOR: </strong>{{ $cardapio->valor }}
-                        </p>
-                    </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>{{ $cardapio->nome }}</strong></h5>
+                            <p class="card-text">
+                                <strong>INGREDIENTES: </strong>{{ $cardapio->descricao }} <br>
+                                <strong>VALOR: </strong>{{ $cardapio->valor }}
+                            </p>
+                                @if ((Auth::check()) && (Auth::user()->isAdmin()))
+                                    {{Form::open(['route'=>['cardapios.destroy',$cardapio->id],'method'=>'DELETE'])}}
+                                    <input type="submit" value="Excluir" class="excluir" onclick="return confirm('Confirmar Exclusão?')">
+                                    {{Form::close()}}
+                                @endif
+                        </div>
                     </div>
                 </div>
-            </div> 
+            </div>
+            @if ((Auth::check()) && (Auth::user()->isAdmin()))
+            </a>
+            @endif
         </div>
     @endforeach
     </div>

@@ -6,6 +6,18 @@
             <a class="nav-link" href="{{ url('restaurantes/create') }}">Registrar Restaurante</a>
         @endsection
     @endif
+    {{Form::open(['url'=>'restaurantes/buscar', 'method'=>'GET'])}}
+        <div class="input-group ml-5">
+            @if($busca!==null)
+            &nbsp;<a href="{{url('restaurantes/')}}" class="btn btn-secondary">Todos</a>&nbsp;
+            @endif
+            {{Form::text('busca',$busca,['class'=>'form-control', 'required', 'placeholder'=>'buscar'])}} &nbsp;
+            <span class="input-group-btn">
+                {{Form::submit('Buscar',['class'=>'btn btn-dark'])}}
+            </span>
+        </div>
+    {{Form::close()}}
+    <hr>
     
     <div class="row row-cols-1 row-cols-md-2 g-4">
     @foreach($restaurantes as $restaurante)
@@ -33,13 +45,11 @@
                 <p class="card-text">{{ $restaurante->rua.' - '.$restaurante->cidade.' - '.$restaurante->estado }} <br> 
                 {{ $restaurante->telefone }}
                 </p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-
                 <a href="{{ url('restaurantes/'.$restaurante->id) }}" class="btn btn-dark">Mais Informações</a>
             </div>
         </div>
         </div>
     @endforeach
-
+    {{$restaurantes->links()}}
 
 @endsection
