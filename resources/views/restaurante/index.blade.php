@@ -13,6 +13,14 @@
             @endif
             {{Form::text('busca',$busca,['class'=>'form-control', 'required', 'placeholder'=>'buscar'])}} &nbsp;
             <span class="input-group-btn">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filtrar
+                </button>
+                <ul class="dropdown-menu">
+                    @foreach($categorias as $categoria)
+                    <li><a class="dropdown-item" href="{{ $categoria->id }}">{{ $categoria->descricao }}</a></li>
+                    @endforeach
+                </ul>
                 {{Form::submit('Buscar',['class'=>'btn btn-dark'])}}
             </span>
         </div>

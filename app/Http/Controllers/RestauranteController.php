@@ -21,7 +21,8 @@ class RestauranteController extends Controller
     public function index()
     {
         $restaurantes = Restaurante::simplepaginate(6);
-        return view('restaurante.index', array('restaurantes'=>$restaurantes, 'busca'=>null));
+        $categorias = Categoria::where('categoria_pai','=','1')->get();
+        return view('restaurante.index', array('restaurantes'=>$restaurantes, 'busca'=>null, 'categorias'=>$categorias));
     }
 
     public function buscar(Request $request) {
