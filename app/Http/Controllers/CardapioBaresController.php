@@ -24,7 +24,7 @@ class CardapioBaresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
         if((Auth::check()) && (Auth::user()->isAdmin())) {
             $bares = Bares::all();
