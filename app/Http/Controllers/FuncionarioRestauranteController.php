@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Support\Facades\Auth;
 use App\Models\FuncionarioRestaurante;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class FuncionarioRestauranteController extends Controller
     {
         if((Auth::check()) && (Auth::user()->isAdmin())) {
             $restaurantes = Restaurante::all();
-            return view('funcionario_restaurante.create',array('restaurantes'=>$restaurantes));
+            return view('restaurantes.funcionario_restaurante.create',array('restaurantes'=>$restaurantes));
         } else {
             return redirect('login');
         }
@@ -78,8 +79,8 @@ class FuncionarioRestauranteController extends Controller
      */
     public function show($id)
     {
-        $funcionarios = FuncionarioRestaurante::where('restaurante_id','=',$id)->get();
-        return view('funcionario_restaurante.show', array('funcionarios'=>$funcionarios));
+        $funcionarios = FuncionarioRestaurante::where('restaurante_id','=',$id)->simplepaginate(9);
+        return view('restaurantes.funcionario_restaurante.show', array('funcionarios'=>$funcionarios));
     }
 
     /**
@@ -93,7 +94,7 @@ class FuncionarioRestauranteController extends Controller
         if((Auth::check()) && (Auth::user()->isAdmin())) {
             $funcionario = FuncionarioRestaurante::find($id);
             $restaurantes = Restaurante::all();
-            return view('funcionario_restaurante.edit',array('funcionario'=>$funcionario,'restaurantes'=>$restaurantes));
+            return view('restaurantes.funcionario_restaurante.edit',array('funcionario'=>$funcionario,'restaurantes'=>$restaurantes));
         } else {
             return redirect('login');
         }
@@ -143,10 +144,15 @@ class FuncionarioRestauranteController extends Controller
      * @param  \App\Models\FuncionarioRestaurante  $funcionarioRestaurante
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FuncionarioRestaurante $funcionarioRestaurante)
+    public function destroy(Request $request, $id)
     {
         if((Auth::check()) && (Auth::user()->isAdmin())) {
-          
+            $funcionario = FuncionarioRestaurante::find($id);
+            if(isset($request->foto)){
+                unlink($request->foto);
+            }
+            $funcionario->delete();
+            return redirect('funcionarios/'.$funcionario->restaurante_id);
         } else {
             return redirect('login');
         }

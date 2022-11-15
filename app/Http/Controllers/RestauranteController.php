@@ -21,17 +21,24 @@ class RestauranteController extends Controller
     public function index()
     {
         $restaurantes = Restaurante::simplepaginate(6);
-        $categorias = Categoria::where('categoria_pai','=','1')->get();
-        return view('restaurante.index', array('restaurantes'=>$restaurantes, 'busca'=>null, 'categorias'=>$categorias));
+        $categorias = Categoria::where('categoria_pai','=','1')->get(); 
+        return view('restaurantes.restaurante.index', array('restaurantes'=>$restaurantes, 'busca'=>null, 'filtro'=>null, 'categorias'=>$categorias));
+    }
+    
+    public function filtrar(Request $request) {
+        $categorias = Categoria::where('categoria_pai','=','1')->get(); 
+        $restaurantes = Restaurante::where('categoria_id','=',$request->input('filtro'))->simplepaginate(6);
+        return view('restaurantes.restaurante.index', array('restaurantes'=>$restaurantes,'filtro'=>$request->input('filtro'), 'busca'=>null, 'categorias'=>$categorias));
     }
 
     public function buscar(Request $request) {
+        $categorias = Categoria::where('categoria_pai','=','1')->get(); 
         $restaurantes = Restaurante::where('nome','LIKE', '%'.
         $request->input('busca'). '%')->orwhere('cidade', 'LIKE', '%'.
         $request->input('busca'). '%')->orwhere('estado', 'LIKE', '%'.
         $request->input('busca'). '%')->orwhere('rua', 'LIKE', '%'.
         $request->input('busca'). '%')->simplepaginate(6);
-        return view('restaurante.index', array('restaurantes'=>$restaurantes, 'busca'=>$request->input('busca')));
+        return view('restaurantes.restaurante.index', array('restaurantes'=>$restaurantes, 'busca'=>$request->input('busca'),'filtro'=>null,'categorias'=>$categorias));
     }
 
 
@@ -44,7 +51,7 @@ class RestauranteController extends Controller
     {
         if((Auth::check()) && (Auth::user()->isAdmin())) {
             $categorias = Categoria::where('categoria_pai','=', '1')->get();
-            return view('restaurante.create',array('categorias'=>$categorias));
+            return view('restaurantes.restaurante.create',array('categorias'=>$categorias));
         } else {
             return redirect('login');
         }
@@ -126,7 +133,7 @@ class RestauranteController extends Controller
         $restaurante = Restaurante::find($id);
         $funcionarios = FuncionarioRestaurante::where('restaurante_id','=',$id)->get();
         $cardapios = CardapioRestaurante::where('restaurante_id','=',$id)->get();
-        return view('restaurante.show', array('restaurante'=>$restaurante, 'funcionarios'=>$funcionarios, 'cardapios'=>$cardapios));
+        return view('restaurantes.restaurante.show', array('restaurante'=>$restaurante, 'funcionarios'=>$funcionarios, 'cardapios'=>$cardapios));
     }
 
     /**
@@ -140,7 +147,7 @@ class RestauranteController extends Controller
         if((Auth::check()) && (Auth::user()->isAdmin())) {
             $restaurante = Restaurante::find($id);
             $categorias = Categoria::where('categoria_pai','=', '1')->get();
-            return view('restaurante.edit', array('restaurante'=>$restaurante, 'categorias'=>$categorias));
+            return view('restaurantes.restaurante.edit', array('restaurante'=>$restaurante, 'categorias'=>$categorias));
         } else {
             return redirect('login');
         }

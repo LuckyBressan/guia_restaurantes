@@ -43,16 +43,16 @@
                             <a class="nav-link" href="{{ url('/restaurantes') }}">Restaurantes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">Bares</a>
+                            <a class="nav-link" href="{{ url('/bares') }}">Bares</a>
                         </li>
                         <li class="nav-item">
                             @yield('create')
                         </li>
                         <li class="nav-item">
-                            @yield('create-funcionario')
+                            @yield('funcionario')
                         </li>
                         <li class="nav-item">
-                            @yield('create-prato')
+                            @yield('prato')
                         </li>
                     </ul>
 

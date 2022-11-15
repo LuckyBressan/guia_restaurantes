@@ -28,7 +28,7 @@ class CardapioRestauranteController extends Controller
     {
         if((Auth::check()) && (Auth::user()->isAdmin())) {
             $restaurantes = Restaurante::all();
-            return view('cardapio_restaurante.create',array('restaurantes'=>$restaurantes));
+            return view('restaurantes.cardapio_restaurante.create',array('restaurantes'=>$restaurantes));
         } else {
             return redirect('login');
         }
@@ -79,8 +79,8 @@ class CardapioRestauranteController extends Controller
      */
     public function show($id)
     {
-        $cardapios = CardapioRestaurante::where('restaurante_id','=',$id)->get();
-        return view('cardapio_restaurante.show', array('cardapios'=>$cardapios));
+        $cardapios = CardapioRestaurante::where('restaurante_id','=',$id)->simplepaginate(9);
+        return view('restaurantes.cardapio_restaurante.show', array('cardapios'=>$cardapios));
     }
 
     /**
@@ -94,7 +94,7 @@ class CardapioRestauranteController extends Controller
         if((Auth::check()) && (Auth::user()->isAdmin())) {
             $cardapio = CardapioRestaurante::find($id);
             $restaurantes = Restaurante::all();
-            return view('cardapio_restaurante.edit', array('restaurantes'=>$restaurantes, 'cardapio'=>$cardapio));
+            return view('restaurantes.cardapio_restaurante.edit', array('restaurantes'=>$restaurantes, 'cardapio'=>$cardapio));
         } else {
             return redirect('login');
         }
@@ -144,7 +144,7 @@ class CardapioRestauranteController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        if(Auth::check()) {
+        if((Auth::check())&& (Auth::user()->isAdmin())) {
             $cardapio = CardapioRestaurante::find($id);
             if(isset($request->foto)){
                 unlink($request->foto);
