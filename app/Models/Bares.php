@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Bares extends Model
 {
     use HasFactory;
+
+    public function categoria() {
+        return $this->belongsTo(Categoria::class, 'categoria_id', 'id');
+    }
 }

@@ -13,4 +13,7 @@ class Categoria extends Model
     public function restaurantes() {
         return $this->hasMany(Restaurante::class, 'categoria_id', 'id');
     }
+    public function bares() {
+        return $this->hasMany(Bares::class, 'categoria_id', 'id');
+    }
 }
